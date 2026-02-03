@@ -1,37 +1,23 @@
-const mongoose = require("mongoose");
-const Product = require("../models/productModel");
+const Product = require("../model/productModel");
 
-const createProduct = async (req, res) => {
-    try {
-        const product = await Product.create(req.body);
-        res.status(201).json(product);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-};
-
-const getallProducts = async (req, res) => {
-    try {
-        const products = await Product.find();
-        res.status(201).json(products);
-    }
-    catch (err) {
-        res.status(500).json({ error: err.message })
-    }
-}
-const getSingleProducts = async (req, res) => {
+exports.createProduct = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const { name, price, stock, image, seller } = req.body;
 
-    if (!product) {
-      return res.status(404).json({ message: "Product not found" });
+    if (!seller) {
+      return res.status(400).json({ message: "Seller id required" });
     }
 
-    res.status(200).json(product);
+    const product = await Product.create({
+      name,
+      price,
+      stock,
+      image,
+      seller
+    });
+
+    res.status(201).json(product);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
-
-
-module.exports = { createProduct, getallProducts,getSingleProducts };
