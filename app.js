@@ -1,5 +1,6 @@
 const express = require("express");
 const connectDb = require("./config/connectDB");
+const cors = require('cors')
 const Productroute = require('./routes/productRoutes');
 const Authroute = require('./routes/Authroute');
 const orderRoute = require('./routes/orderRoutes')
@@ -12,7 +13,7 @@ app.use(express.json());
 
 // DB connect
 connectDb();
-
+app.use(cors())
 app.use('/api/products', Productroute)
 app.use('/api/orders', orderRoute)
 app.use('/api', Authroute)
