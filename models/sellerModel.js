@@ -13,10 +13,6 @@ const sellerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    companyname: {
-        type: String,
-        required: true
-    }
 })
 
 module.exports = mongoose.model("seller", sellerSchema)
