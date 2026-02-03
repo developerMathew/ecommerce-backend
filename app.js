@@ -2,6 +2,7 @@ const express = require("express");
 const connectDb = require("./config/connectDB");
 const cors = require('cors')
 const Productroute = require('./routes/productRoutes');
+const sellerroute = require('./routes/sellerRoutes');
 const Authroute = require('./routes/Authroute');
 const orderRoute = require('./routes/orderRoutes')
 require("dotenv").config();
@@ -17,6 +18,7 @@ app.use(cors())
 app.use('/api/products', Productroute)
 app.use('/api/orders', orderRoute)
 app.use('/api', Authroute)
+app.use('/api/seller', sellerroute)
 
 // server start
 const PORT = process.env.PORT || 5000;
